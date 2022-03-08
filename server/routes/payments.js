@@ -42,7 +42,8 @@ router.post('/verify-payment', isLoggedIn, async (req, res) => {
     indianCount,
     foreignerCount,
     date,
-    issuer
+    issuer,
+    ticket_id
   } = req.body;
   const { currentUser } = req;
   const resp = validatePaymentVerification(
@@ -56,7 +57,7 @@ router.post('/verify-payment', isLoggedIn, async (req, res) => {
 
   if (resp) {
     const ticket = new Ticket({
-      id: order_id,
+      id: ticket_id,
       totalPrice: amount,
       place: monumentName,
       childrenCount,
