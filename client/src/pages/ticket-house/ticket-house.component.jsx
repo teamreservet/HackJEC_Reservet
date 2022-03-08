@@ -1,20 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import Loader from '../../components/loader/loader.component';
 import MounmentCard from '../../components/monument-card/monument-card.component';
 import FilterCard from '../../components/filter-card/filter-card.component';
+import CheckoutBox from '../../components/checkout/checkout.component';
 
-import arrow from '../../assets/arrow.png';
-import monument from '../../assets/monument.png';
-import museum from '../../assets/museum.jpg';
-import heritage from '../../assets/heritage.jpg';
+import { searchQueryContext } from '../../contexts';
+
+import monument from '../../assets/monument.svg';
+import museum from '../../assets/museum.svg';
+import heritage from '../../assets/heritage.svg';
 
 import './ticket-house.styles.scss';
 
 const TicketHouse = ({ monuments, statesData }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useContext(searchQueryContext);
   const [state, setState] = useState('');
+  const [checkoutMonumentDetails, setCheckoutMonumentDetails] = useState(null);
 
   const handleChangeInput = e => {
     setSearchQuery(e.target.value);
@@ -34,6 +37,17 @@ const TicketHouse = ({ monuments, statesData }) => {
     <div className='ticket-house'>
       <h1 className='heading'>Ticket Counter</h1>
       <div className='background' />
+      {checkoutMonumentDetails && (
+        <div
+          className='checkout-box-wrapper'
+          onClick={() => setCheckoutMonumentDetails(null)}
+        >
+          <CheckoutBox
+            checkoutMonumentDetails={checkoutMonumentDetails}
+            setCheckoutMonumentDetails={setCheckoutMonumentDetails}
+          />
+        </div>
+      )}
       <div className='filter-monuments'>
         <select
           name='states'
@@ -49,7 +63,7 @@ const TicketHouse = ({ monuments, statesData }) => {
               ))
             : null}
         </select>
-        <img src={arrow} alt='down-arrow' className='down-arrow' />
+        <span className='down-arrow'>&#9660;</span>
         <select
           name='cities'
           onChange={handleChangeCity}
@@ -64,7 +78,7 @@ const TicketHouse = ({ monuments, statesData }) => {
               ))
             : null}
         </select>
-        <img src={arrow} alt='down-arrow' className='down-arrow' />
+        <span className='down-arrow'>&#9660;</span>
         <input
           className='search-field options'
           placeholder='Type place or name...'
@@ -72,11 +86,13 @@ const TicketHouse = ({ monuments, statesData }) => {
           onChange={handleChangeInput}
         />
       </div>
-      <div className='filter-card-wrapper'>
-        <FilterCard name='monuments' image={monument} />
-        <FilterCard name='heritages' image={heritage} />
-        <FilterCard name='museums' image={museum} />
-      </div>
+      {searchQuery.length === 0 && (
+        <div className='filter-card-wrapper'>
+          <FilterCard name='monuments' image={monument} />
+          <FilterCard name='heritages' image={heritage} />
+          <FilterCard name='museums' image={museum} />
+        </div>
+      )}
       <div className='monuments'>
         {monuments ? (
           monuments
@@ -104,7 +120,12 @@ const TicketHouse = ({ monuments, statesData }) => {
               // }
             )
             .map((monument, ind) => (
-              <MounmentCard key={monument._id} ind={ind} monument={monument} />
+              <MounmentCard
+                key={monument._id}
+                ind={ind}
+                monument={monument}
+                setCheckoutMonumentDetails={setCheckoutMonumentDetails}
+              />
             ))
         ) : (
           <Loader />
@@ -116,7 +137,8 @@ const TicketHouse = ({ monuments, statesData }) => {
 
 const mapStateToProps = state => ({
   monuments: state.monument.monuments,
-  statesData: state.statesData.statesData
+  statesData: state.statesData.statesData,
+  currentUser: state.user.currentUser
 });
 
 export default connect(mapStateToProps)(TicketHouse);

@@ -1,7 +1,8 @@
 .DS_Store
 
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# client
 
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # dependencies
 client/node_modules
 client/.pnp
@@ -23,3 +24,11 @@ client/.env.production.local
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
+
+
+#server
+
+server/node_modules
+server/seed.js
+server/.env
+server/.DS_Store
