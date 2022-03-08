@@ -1,0 +1,24 @@
+{
+  "name": "reservet-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Prateek Goyal",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^1.28.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.2",
+    "multer": "^1.4.4",
+    "multer-storage-cloudinary": "^4.0.0",
+    "razorpay": "^2.8.0",
+    "shortid": "^2.2.8"
+  }
+}
