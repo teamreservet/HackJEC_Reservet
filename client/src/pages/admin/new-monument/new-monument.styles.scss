@@ -1,0 +1,72 @@
+.new-monument-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0 auto 50px;
+  color: white;
+
+  .heading {
+    text-align: center;
+  }
+
+  .background {
+    width: 2000px;
+    height: 1500px;
+    position: fixed;
+    // top: -50vh;
+    transform: rotate(-25deg) translateY(-1300px) translateX(0px);
+    z-index: -1;
+    background-color: rgb(14, 14, 145);
+  }
+
+  .new-monument-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+
+    .form-input-container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      margin-top: 50px;
+
+      input[type='file'] {
+        border-bottom: 1px solid black;
+        width: 100%;
+        color: black;
+
+        &::-webkit-file-upload-button {
+          padding: 10px;
+          border: 1px solid black;
+          border-bottom: none;
+          font-size: 14px;
+        }
+      }
+    }
+    .text-area-container {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      align-items: center;
+      margin: 50px 0;
+
+      .label {
+        color: gray;
+        font-size: 22px;
+      }
+      .textarea {
+        width: 100%;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+
+    .submit-button {
+      padding: 10px;
+      width: 200px;
+    }
+  }
+}
