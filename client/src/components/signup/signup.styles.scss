@@ -1,0 +1,27 @@
+.registration-form {
+  display: flex;
+  flex-direction: column;
+
+  .form-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+
+    form {
+      width: 100%;
+    }
+
+    .submit-button {
+      padding: 10px;
+      width: 200px;
+    }
+  }
+  .to-log-in {
+    margin-top: 20px;
+    & span {
+      cursor: pointer;
+      color: blue;
+    }
+  }
+}
