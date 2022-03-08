@@ -1,0 +1,23 @@
+.custom-button {
+  background-color: #1a73e8;
+  color: white;
+  padding: 9px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &.book-now {
+    width: 80%;
+    background: linear-gradient(45deg, #083fd8, #6791f3 70%);
+    border: 1px solid black;
+
+    &.big {
+      padding: 30px 0;
+      width: 35%;
+      border-radius: 70px;
+      font-size: 20px;
+      font-weight: 700;
+      border: none;
+    }
+  }
+}
