@@ -1,22 +1,33 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import TicketHousePopUp from '../ticket-house-pop-up/ticket-house-pop-up.component';
+import UserDashboard from '../user-dashboard/user-dashboard.component';
+
+import { showDashboardContext } from '../../contexts';
 
 import ReservetLogo from '../../assets/reservet.svg';
-
-import { auth, signOut } from '../../firebase/firebase.utils';
+import verticalLines from '../../assets/vertical-lines.svg';
 
 import './header.styles.scss';
 
 const Header = ({ currentUser }) => {
   const [PopUp, setPopUp] = useState(false);
   const [hoverOn, setHoverOn] = useState('');
+  const [showDashboard, setShowDashboard] = useContext(showDashboardContext);
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimate(true);
+    }, 300);
+  }, [setAnimate]);
+
   const navigate = useNavigate();
 
   return (
-    <div className='header'>
+    <div className={`header ${animate ? 'animate' : ''}`}>
       <div className='header-elements'>
         <div className='logo-container' onClick={() => navigate('/')}>
           <img src={ReservetLogo} alt='logo' className='logo' />
@@ -69,10 +80,13 @@ const Header = ({ currentUser }) => {
           </div>
           {currentUser ? (
             <div
-              className='authenticate'
-              onClick={async () => await signOut(auth)}
+              className='profile-icon'
+              onClick={e => {
+                e.stopPropagation();
+                setShowDashboard(true);
+              }}
             >
-              Sign out
+              <img src={verticalLines} alt='' className='vertical-lines' />
             </div>
           ) : (
             <Link className='authenticate' to='/authenticate/register'>
@@ -81,6 +95,7 @@ const Header = ({ currentUser }) => {
           )}
         </div>
       </div>
+      <UserDashboard showDashboard={showDashboard} />
     </div>
   );
 };

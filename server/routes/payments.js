@@ -69,6 +69,8 @@ router.post('/verify-payment', isLoggedIn, async (req, res) => {
       issuer,
       issuer_account: currentUser
     });
+    currentUser.upcomingTrips.push(ticket);
+    await currentUser.save();
     await ticket.save();
   }
   res.send(resp);

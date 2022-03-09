@@ -16,7 +16,13 @@ const userSchema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
     required: true
-  }
+  },
+  upcomingTrips: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Ticket'
+    }
+  ]
 });
 
 const User = mongoose.model('User', userSchema);

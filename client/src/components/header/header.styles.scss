@@ -54,7 +54,7 @@
         }
 
         .header-pop-up {
-          position: absolute;
+          position: fixed;
           top: 70px;
         }
       }
@@ -73,6 +73,15 @@
           color: white;
           background-color: #113cfd;
           font-weight: 700;
+        }
+      }
+
+      .profile-icon {
+        cursor: pointer;
+        text-align: center;
+
+        .vertical-lines {
+          width: 30px;
         }
       }
     }

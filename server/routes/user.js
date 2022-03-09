@@ -24,12 +24,14 @@ router.post('/get', async (req, res) => {
   const { uid } = req.body;
   try {
     let user = await User.findOne({ uid });
+    user = await user.populate('upcomingTrips');
     const token = jwt.sign({ uid }, process.env.SECRET, { expiresIn: 60 * 60 });
     if (user) {
       res.status(200).json({ token, user });
     } else {
       setTimeout(async () => {
         user = await User.findOne({ uid });
+        user = await user.populate('upcomingTrips');
         if (user) {
           res.status(200).json({ token, user });
         } else {
