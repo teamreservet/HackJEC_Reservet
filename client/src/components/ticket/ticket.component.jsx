@@ -1,8 +1,10 @@
 import './ticket.styles.scss';
+import reservetLogo from '../../assets/reservet-logo.png';
 
 const Ticket = ({
   ticketId,
   monumentName,
+  monumentPlace,
   childrenCount,
   indianCount,
   foreignerCount,
@@ -13,23 +15,27 @@ const Ticket = ({
   return (
     <div className='ticket'>
       <div className='ticket-qr-wrapper'>
-        <p>id: {ticketId}</p>
+        <p className='tid-wrapper'>
+          TID - <span className='tid'>{ticketId}</span>
+        </p>
         <img
-          src={`http://api.qrserver.com/v1/create-qr-code/?data=https://reservet.netlify.app/ticket-verification/${ticketId}`}
+          src={`http://api.qrserver.com/v1/create-qr-code/?data=https://reservet.netlify.app/verify-ticket/${ticketId}`}
           alt='qr-code'
           className='ticket-qr-code'
         />
-        <h3>{monumentName}</h3>
+        <h3>
+          {monumentName} ,{monumentPlace}
+        </h3>
       </div>
       <div className='ticket-details'>
-        <p>Name: {issuer}</p>
-        {indianCount ? <p>Indian: {indianCount}</p> : null}
-        {foreignerCount ? <p>Foreigner: {foreignerCount}</p> : null}
-        {childrenCount ? <p>Children: {childrenCount}</p> : null}
+        <img src={reservetLogo} alt='' className='reservet-logo-test' />
+        <p>Ticket Issued To : {issuer}</p>
         <p>Date: {date}</p>
-        <p className='subtotal'>
-          <b>Subtotal: {amount}</b>
-        </p>
+        {indianCount ? <p>Indian count: {indianCount}</p> : null}
+        {foreignerCount ? <p>Foreigner count: {foreignerCount}</p> : null}
+        {childrenCount ? <p>Children count: {childrenCount}</p> : null}
+
+        <h3 className='subtotal'>Subtotal: {amount}</h3>
       </div>
     </div>
   );

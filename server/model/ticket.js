@@ -29,7 +29,11 @@ const ticketSchema = mongoose.Schema({
     type: Number,
     required: true
   },
-  place: {
+  monumentName: {
+    type: String,
+    required: true
+  },
+  monumentPlace: {
     type: String,
     required: true
   },

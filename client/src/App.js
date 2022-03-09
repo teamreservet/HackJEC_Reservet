@@ -8,6 +8,7 @@ import SignUpAndLogInPage from './pages/sign-up-log-in-page/sign-up-log-in-page.
 import TicketHouse from './pages/ticket-house/ticket-house.component';
 import Admin from './pages/admin/admin.component';
 import NewMonument from './pages/admin/new-monument/new-monument.component';
+import VerifyTicket from './pages/admin/verify-ticket/verify-ticket.component';
 
 import Header from './components/header/header.component';
 import NotFound from './components/not-found/not-found.component';
@@ -27,7 +28,6 @@ import { loadStates } from './redux/state/state.action';
 import { serverBaseUrlContext, searchQueryContext } from './contexts';
 
 import './App.css';
-import Ticket from './components/ticket/ticket.component';
 
 function App({ setCurrentUser, loadMonuments, loadStates }) {
   // base url of our server
@@ -78,7 +78,8 @@ function App({ setCurrentUser, loadMonuments, loadStates }) {
               <Route path='register' element={<SignUp />} />
               <Route path='login' element={<SignIn />} />
             </Route>
-            <Route path='/ticket' element={<Ticket />} />
+            <Route path='/verify-ticket/:id' element={<VerifyTicket />} />
+            <Route path='/verify-ticket' element={<VerifyTicket />} />
             <Route path='/*' element={<NotFound />} />
             <Route path='/admin' element={<Admin />}>
               <Route path='upload-monuments' element={<NewMonument />} />
@@ -97,4 +98,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(App);
-
